@@ -6,13 +6,15 @@
 
 class Automobile {
 private:
-    std::string id;
-    int miles;
+    int id;
+    float miles;
     std::string prev_maint_date;
 
 public:
-    Automobile(std::string _id, std::string miles, std::string prev_maint_date);
-    std::string toString();
+    Automobile(int _id, float _miles, int _prev_maint_month, int _prev_maint_day, int _prev_maint_year);
+    virtual int getId( );
+    virtual float getMiles( );
+    virtual std::string getPrev_maint_date( );
+    virtual std::string info_string( );
 };
-
 #endif /* AUTOMOBILE_H_ */
