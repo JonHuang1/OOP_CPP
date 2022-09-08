@@ -3,12 +3,13 @@
 
 class Staticy {
 private:
-    static int count;
+    static int even_count;
+    int num;
     Staticy(int i);  
 
 public:
     static Staticy* makeStaticy(int i);
-    static int get_value( );
+    static int getEvenCount( );
 };
 
 #endif /* STATICY_H_ */
