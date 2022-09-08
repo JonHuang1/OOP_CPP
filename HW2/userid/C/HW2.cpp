@@ -23,7 +23,7 @@ int main(int argc, char** args) {
    // b->f5( ); // S16
    // b->f6( ); // S17
    // b->foo0( ); // S18
-   b->foo1( ); // S19
+   // b->foo1( ); // S19
    // b->foo2( ); // S20
 
    Derived* d = new Derived( ); // 21
@@ -34,6 +34,6 @@ int main(int argc, char** args) {
    // d->f5( ); // 26
    // d->f6( ); // 27
    // d->foo0( ); // 28
-   d->foo1( ); // 29
+   // d->foo1( ); // 29
    // d->foo2( ); // 30
 }
