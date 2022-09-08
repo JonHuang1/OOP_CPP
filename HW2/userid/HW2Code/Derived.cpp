@@ -20,3 +20,12 @@ void Derived::f1( ) {
 void Derived::f2( ) {
    std::cout << "Derived::f2" << std::endl;
 }
+
+void Derived::f4( ) {
+   std::cout << "Derived::f4" << std::endl;
+}
+
+void Derived::foo1( ) {
+   std::cout << "Derived::foo1" << std::endl;
+   f1( );
+}
