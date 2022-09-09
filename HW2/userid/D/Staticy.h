@@ -4,7 +4,6 @@
 class Staticy {
 private:
     static int even_count;
-    int num;
     Staticy(int i);  
 
 public:
