@@ -1,4 +1,4 @@
-OBJS = 
+OBJS = TwoTuple.o Map.o main.o
 CC = g++
 INCLUDE = 
 LIBS = -lm
