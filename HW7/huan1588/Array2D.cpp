@@ -67,7 +67,6 @@ Array2D::~Array2D( ) {
 }
 
 Array2D& Array2D::operator=(const Array2D& p1) {
-   Array2D(p1.getNumRows(), p1.getNumCols());
    for (int i=0; i<numRows; i++)
    {
       for (int j=0; j<numCols; j++)

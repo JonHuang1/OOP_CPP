@@ -8,7 +8,8 @@ COMMANDLINE =
 
 .PHONY : run
 run : $(EXECUTABLE)
-	./$(EXECUTABLE) $(COMMANDLINE)
+	valgrind -s ./$(EXECUTABLE) $(COMMANDLINE)
+	# ./$(EXECUTABLE) $(COMMANDLINE)
 	make clean
 
 cleanmake : clean $(EXECUTABLE)
