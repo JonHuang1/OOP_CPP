@@ -67,6 +67,22 @@ Array2D::~Array2D( ) {
 }
 
 Array2D& Array2D::operator=(const Array2D& p1) {
+   if (!sameSize(p1))
+   {
+      deleteAry(ary);
+      numRows = p1.getNumRows();
+      numCols = p1.getNumCols();
+      ary = new int*[numRows];
+      for (int i = 0; i < numRows; i++) 
+      {
+         ary[i] = new int[numCols];
+         for (int j = 0; j < numCols; j++) 
+         {
+            ary[i][j] = -1;
+         }
+      }
+   }
+
    for (int i=0; i<numRows; i++)
    {
       for (int j=0; j<numCols; j++)
