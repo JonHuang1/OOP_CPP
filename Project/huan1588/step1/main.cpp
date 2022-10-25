@@ -13,8 +13,9 @@ int main() {
         std::istringstream iss(line);
         std::string opcode, operand;
         iss >> opcode >> operand;
+        
         std::cout << "opcode = " + opcode << std::endl;
-        std::cout << "operand = " + operand << std::endl;
+        std::cout << "operand = " + operand << std::endl << std::endl;
     }
 }
 
