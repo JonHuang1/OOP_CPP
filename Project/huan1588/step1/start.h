@@ -1,15 +1,17 @@
 #ifndef START_H_
 #define START_H_
 #include "stmt.h"
+#include <string>
 
-class start {
+class start : public stmt {
 public:
-    void serialize();
-    
-private:
-    static start* instance;
+    void serialize(std::string file);
+    bool need_patchup();
     start();
-    static int count;
+private:
+    int var_count;
+    std::string to_serialize;
+    bool patchup_status;
 };
 
 #endif /* START_H_ */
