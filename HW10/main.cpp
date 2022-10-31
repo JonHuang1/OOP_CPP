@@ -1,6 +1,8 @@
 #include <iostream>
 #include <chrono>
 #include <memory>
+#include <vector>
+#include <mutex>
 
 #include "QuickSort.h"
 

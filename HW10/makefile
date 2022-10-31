@@ -2,7 +2,7 @@ OBJS = main.o QuickSort.o
 CC = g++
 INCLUDE = 
 LIBS = -lm
-CFLAGS = -std=c++11 -Wall -g
+CFLAGS = -std=c++11 -Wall -g -pthread
 EXECUTABLE = HW10
 COMMANDLINE = 
 

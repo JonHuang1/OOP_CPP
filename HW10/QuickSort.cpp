@@ -65,3 +65,11 @@ int QuickSort::partition(int low, int high) {
 
    return pos+1;
 }
+
+void QuickSort::execute() {
+   
+}
+
+void QuickSort::identify() {
+   
+}
