@@ -1,4 +1,4 @@
-OBJS = main.o
+OBJS = main.o start.o
 CC = g++
 INCLUDE = 
 LIBS = -lm
