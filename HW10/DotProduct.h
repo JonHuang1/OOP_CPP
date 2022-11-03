@@ -6,11 +6,13 @@ class DotProduct: public Command {
 private:
     int dot_prod;
     int length;
+    int* arr1;
+    int* arr2;
     void dot_product(int* arr1, int* arr2);
 
 public:
     DotProduct( );
-    DotProduct(int length);
+    DotProduct(int _length);
     virtual void execute();
     virtual void identify();
 

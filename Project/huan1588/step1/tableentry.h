@@ -4,8 +4,11 @@
 
 class TableEntry{
 public:
-    TableEntry();
+    TableEntry(double _location, double _length);
 private:
+    double location;
+    double length;
     
 };
-#endif 
+
+#endif /* TABLEENTRY_H_ */

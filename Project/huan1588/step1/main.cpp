@@ -137,7 +137,7 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     else if (opcode == "start")
     {
         instruction = std::make_unique<start>();
-        instruction->serialize("test.b");
+        instruction->serialize("test");
     }
     else if (opcode == "swap")
     {
@@ -153,7 +153,8 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
 
 int main() 
 {
-    std::ifstream infile("/home/jonhuang918/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/0StartExit");
+    // std::ifstream infile("/home/jonhuang918/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/0StartExit");
+    std::ifstream infile("/home/jon/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/0StartExit");
     
     std::string line;
     while (std::getline(infile, line))
@@ -161,6 +162,7 @@ int main()
         std::istringstream iss(line);
         std::string opcode, operand, arg3;
         iss >> opcode >> operand >> arg3;
+        std::cout << line << std::endl;
         
         // std::cout << "opcode = " + opcode << std::endl;
         // std::cout << "operand = " + operand << std::endl;

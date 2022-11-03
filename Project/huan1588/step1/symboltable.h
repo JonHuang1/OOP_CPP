@@ -1,13 +1,19 @@
 #ifndef SYMBOLTABLE_H_
 #define SYMBOLTABLE_H_
 #include <string>
+#include <unordered_map>
+#include <vector>
+#include "tableentry.h"
 
-class SymbolTable{
+class SymbolTable {
 public:
-    SymbolTable(std::string _label, int _location, int _length);
+    SymbolTable();
+    void insert(std::string _name, TableEntry* _data);
+
+    void enter_scope();
+    void leave_scope();
 private:
-    std::string label;
-    int location;
-    int length;
+    std::vector<std::unordered_map<std::string, TableEntry*>> table;
 };
-#endif 
+
+#endif /* SYMBOLTABLE_H_ */

@@ -1,9 +1,7 @@
 #include "tableentry.h"
-#include<iostream>
+#include <iostream>
 #include <tuple>
 
-class TableEntry{
-    //TableEntry
-    tuple <int,int> entry;
+TableEntry::TableEntry(double _location, double _length) : location(_location), length(_length) {
 
 }
