@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <mutex>
 
 #include "QuickSort.h"
 
@@ -67,9 +68,9 @@ int QuickSort::partition(int low, int high) {
 }
 
 void QuickSort::execute() {
-   
+   this->sort( );
 }
 
 void QuickSort::identify() {
-   
+   std::cout << *this;
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <mutex>
 #include "DotProduct.h"
 
 DotProduct::DotProduct() {
@@ -16,7 +17,7 @@ DotProduct::DotProduct(int _length) : length(_length), dot_prod(0) {
     }
 }
 
-void DotProduct::dot_product(int* arr1, int* arr2) {
+void DotProduct::dot_product() {
     for(int i=0; i<length; i++)
     {
         dot_prod += arr1[i] * arr2[i];
@@ -25,14 +26,16 @@ void DotProduct::dot_product(int* arr1, int* arr2) {
 
 std::ostream& operator<<(std::ostream& os, const DotProduct dp) {
 
-    os << "inner product on arrays of length " << dp.length << ", result is " << dp.dot_prod;
+    os << "inner product on arrays of length " << dp.length \
+    << ", result is " << dp.dot_prod;
+    os << "\n\n";
     return os;
 }
 
 void DotProduct::execute() {
-
+    this->dot_product();
 }
 
 void DotProduct::identify() {
-    std::cout << 
+    std::cout << *this;
 }

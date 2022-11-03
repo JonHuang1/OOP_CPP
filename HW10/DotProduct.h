@@ -8,7 +8,7 @@ private:
     int length;
     int* arr1;
     int* arr2;
-    void dot_product(int* arr1, int* arr2);
+    void dot_product();
 
 public:
     DotProduct( );

@@ -1,4 +1,4 @@
-OBJS = main.o QuickSort.o 
+OBJS = main.o QuickSort.o DotProduct.o WorkerQueue.o
 CC = g++
 INCLUDE = 
 LIBS = -lm
