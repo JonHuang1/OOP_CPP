@@ -55,9 +55,13 @@ int main(int argc, char** args) {
    std::thread t2(worker, &Q);
    std::thread t3(worker, &Q);
    std::thread t4(worker, &Q);
+   t1.join();
+   t2.join();
+   t3.join();
+   t4.join();
    auto stop = high_resolution_clock::now();
    auto duration = duration_cast<microseconds>(stop - start).count();
-   std::cout << "execution time with 4 threads is " << duration << "microseconds\n";
+   std::cout << "execution time with 4 threads is " << duration << " microseconds\n";
 
 
    // int sortSize = STARTSIZE;

@@ -8,12 +8,12 @@ DotProduct::DotProduct() {
 }
 
 DotProduct::DotProduct(int _length) : length(_length), dot_prod(0) {
-    arr1 = new int[length];
-    arr2 = new int[length];
+    arr1 = new double[length];
+    arr2 = new double[length];
     for (int i=0; i<length; i++)
     {
-        arr1[i] = rand( ) % 100;
-        arr2[i] = rand( ) % 100;
+        arr1[i] = rand( );
+        arr2[i] = rand( );
     }
 }
 

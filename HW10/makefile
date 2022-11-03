@@ -1,8 +1,8 @@
 OBJS = main.o QuickSort.o DotProduct.o WorkerQueue.o
-CC = g++
+CC = g++ -pthread -std=c++11
 INCLUDE = 
 LIBS = -lm
-CFLAGS = -std=c++11 -Wall -g -pthread
+CFLAGS =  -Wall -g 
 EXECUTABLE = HW10
 COMMANDLINE = 
 

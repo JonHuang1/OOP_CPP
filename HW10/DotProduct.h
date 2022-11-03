@@ -4,10 +4,10 @@
 
 class DotProduct: public Command {
 private:
-    int dot_prod;
+    double dot_prod;
     int length;
-    int* arr1;
-    int* arr2;
+    double* arr1;
+    double* arr2;
     void dot_product();
 
 public:
