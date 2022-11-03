@@ -12,7 +12,7 @@ SymbolTable::SymbolTable()
 }
 
 void SymbolTable::insert(std::string _name, TableEntry* _data) {
-
+    
 }
 
 void enter_scope() {
