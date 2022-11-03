@@ -12,4 +12,5 @@ public:
     void put(std::shared_ptr<Command>);
 private:
     std::vector<std::shared_ptr<Command>> queue;
+    static std::mutex m;
 };
