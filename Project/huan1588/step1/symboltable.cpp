@@ -1,4 +1,4 @@
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <iostream>
 
@@ -13,12 +13,18 @@ SymbolTable::SymbolTable()
 
 void SymbolTable::insert(std::string _name, TableEntry* _data) {
     
+    if (table.back().count(_name) == 1)
+    {
+        //ERROR, you redeclared an var w/ same name in scope
+    }
+    table.back()[_name] = _data;
 }
 
-void enter_scope() {
-    
+void SymbolTable::enter_scope() {
+    table.push_back(std::unordered_map<std::string, TableEntry*>{});
 }
 
-void leave_scope() {
+void SymbolTable::leave_scope() {
+    table.pop_back();
 
 }
