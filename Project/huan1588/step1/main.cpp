@@ -6,10 +6,10 @@
 #include "add.h"
 #include "declarr.h"
 #include "declscal.h"
-#include "div.h"
+#include "Div.h"
 #include "dup.h"
 #include "end.h"
-#include "exit.h"
+#include "Exit.h"
 #include "gosub.h"
 #include "gosublabel.h"
 #include "instruction_buffer.h"
@@ -35,12 +35,13 @@
 #include "symboltable.h"
 #include "tableentry.h"
 
-std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string& operand)
+std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string& operand, std::ofstream& savefile)
 {
     std::unique_ptr<stmt> instruction;
     if (opcode == "add")
     {
-
+        instruction = std::make_unique<add>();
+        instruction->serialize(savefile);
     }
     else if (opcode == "declarr")
     {
@@ -52,7 +53,8 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     }
     else if (opcode == "div")
     {
-
+        instruction = std::make_unique<Div>();
+        instruction->serialize(savefile);
     }
     else if (opcode == "dup")
     {
@@ -64,7 +66,8 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     }
     else if (opcode == "exit")
     {
-        
+        instruction = std::make_unique<Exit>();
+        instruction->serialize(savefile);
     }
     else if (opcode == "gosub")
     {
@@ -116,7 +119,8 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     }
     else if (opcode == "printtos")
     {
-        
+        instruction = std::make_unique<printtos>();
+        instruction->serialize(savefile);
     }
     else if (opcode == "pusharr")
     {
@@ -124,7 +128,8 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     }
     else if (opcode == "pushi")
     {
-        
+        instruction = std::make_unique<pushi>(stoi(operand));
+        instruction->serialize(savefile);
     }
     else if (opcode == "pushscal")
     {
@@ -137,7 +142,7 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     else if (opcode == "start")
     {
         instruction = std::make_unique<start>();
-        instruction->serialize("test");
+        instruction->serialize(savefile);
     }
     else if (opcode == "swap")
     {
@@ -153,10 +158,11 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
 
 int main() 
 {
-    // std::ifstream infile("/home/jonhuang918/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/0StartExit");
-    std::ifstream infile("/home/jon/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/0StartExit");
+    std::ifstream infile("/home/jonhuang918/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/3Add");
+    // std::ifstream infile("/home/jon/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/0StartExit");
     
     std::string line;
+    std::ofstream savefile("test", std::ofstream::out);
     while (std::getline(infile, line))
     {
         std::istringstream iss(line);
@@ -168,9 +174,9 @@ int main()
         // std::cout << "operand = " + operand << std::endl;
         // std::cout << "arg3 = " + arg3 << std::endl << std::endl;
 
-        get_instruction_from_str(opcode, operand);
+        get_instruction_from_str(opcode, operand, savefile);
     }
-
+    savefile.close();
     
 }
 

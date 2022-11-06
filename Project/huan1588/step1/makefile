@@ -1,4 +1,5 @@
-OBJS = main.o start.o tableentry.o symboltable.o
+OBJS = main.o start.o tableentry.o symboltable.o Exit.o pushi.o printtos.o \
+add.o
 CC = g++
 INCLUDE = 
 LIBS = -lm

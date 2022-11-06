@@ -5,7 +5,7 @@
 
 class start : public stmt {
 public:
-    void serialize(std::string file);
+    void serialize(std::ofstream& savefile);
     bool need_patchup();
     start();
 private:

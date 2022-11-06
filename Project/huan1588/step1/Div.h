@@ -1,16 +1,16 @@
-#ifndef EXIT_H_
-#define EXIT_H_
+#ifndef DIV_H_
+#define DIV_H_
 #include "stmt.h"
 #include <string>
 
-class exit : public stmt {
+class Div : public stmt {
 public:
-    void serialize(std::string file);
+    void serialize(std::ofstream& savefile);
     bool need_patchup();
-    exit();
+    Div();
 private:
     std::string to_serialize;
     bool patchup_status;
 };
 
-#endif /* EXIT_H_ */
+#endif /* DIV_H_ */

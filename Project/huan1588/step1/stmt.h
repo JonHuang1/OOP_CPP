@@ -4,7 +4,7 @@
 
 class stmt {
 public:
-    virtual void serialize(std::string file) = 0;
+    virtual void serialize(std::ofstream& savefile) = 0;
     virtual bool need_patchup() = 0;
 };
 
