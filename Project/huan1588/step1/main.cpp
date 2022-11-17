@@ -17,7 +17,6 @@
 #include "jumpnzero.h"
 #include "jumpzero.h"
 #include "label.h"
-#include "map.h"
 #include "mul.h"
 #include "negate.h"
 #include "pop.h"
@@ -31,13 +30,15 @@
 #include "return.h"
 #include "start.h"
 #include "stmt.h"
+#include "string_buffer.h"
 #include "swap.h"
 #include "symboltable.h"
 #include "tableentry.h"
 
-std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string& operand, std::ofstream& savefile)
+void get_instruction_from_str(std::string& opcode, std::string& operand, std::ofstream& savefile, string_buffer* sb)
 {
     std::unique_ptr<stmt> instruction;
+    instruction_buffer* ib = instruction_buffer::get_instance();
     if (opcode == "add")
     {
         instruction = std::make_unique<add>();
@@ -45,11 +46,13 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     }
     else if (opcode == "declarr")
     {
-
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "declscal")
     {
-
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "div")
     {
@@ -58,11 +61,13 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     }
     else if (opcode == "dup")
     {
-
+        instruction =  std::make_unique<dup>();
+        instruction->serialize(savefile);
     }
     else if (opcode == "end")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "exit")
     {
@@ -71,51 +76,64 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     }
     else if (opcode == "gosub")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "gosublabel")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "jump")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "jumpnzero")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "jumpzero")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "label")
     {
-        
+        std::cout << operand << ", " << ib->get_location() << std::endl;
+        instruction = std::make_unique<label>(operand, ib->get_location());
+        instruction->serialize(savefile);
     }
     else if (opcode == "mul")
     {
-        
+        instruction = std::make_unique<mul>();
+        instruction->serialize(savefile);
     }
     else if (opcode == "negate")
     {
-        
+        instruction = std::make_unique<negate>();
+        instruction->serialize(savefile);
     }
     else if (opcode == "pop")
     {
-        
+        instruction = std::make_unique<pop>();
+        instruction->serialize(savefile);
     }
     else if (opcode == "poparr")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "popscal")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "prints")
     {
-        
+        instruction = std::make_unique<prints>(operand, sb);
+        instruction->serialize(savefile);
     }
     else if (opcode == "printtos")
     {
@@ -124,7 +142,8 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     }
     else if (opcode == "pusharr")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "pushi")
     {
@@ -133,11 +152,13 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     }
     else if (opcode == "pushscal")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "return")
     {
-        
+        // instruction = std::make_unique<negate>();
+        // instruction->serialize(savefile);
     }
     else if (opcode == "start")
     {
@@ -146,23 +167,26 @@ std::unique_ptr<stmt> get_instruction_from_str(std::string& opcode, std::string&
     }
     else if (opcode == "swap")
     {
-        
+        instruction = std::make_unique<swap>();
+        instruction->serialize(savefile);
     }
     else
     {
         instruction = NULL;
     }
-
-    return instruction;
+    ib->insert(std::move(instruction));
 }
 
 int main() 
 {
-    std::ifstream infile("/home/jonhuang918/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/3Add");
+    std::ifstream infile("/home/jonhuang918/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/11Label");
     // std::ifstream infile("/home/jon/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/0StartExit");
     
     std::string line;
     std::ofstream savefile("test", std::ofstream::out);
+    string_buffer* sb = new string_buffer();
+    // instruction_buffer* ib = instruction_buffer::get_instance();
+
     while (std::getline(infile, line))
     {
         std::istringstream iss(line);
@@ -174,12 +198,9 @@ int main()
         // std::cout << "operand = " + operand << std::endl;
         // std::cout << "arg3 = " + arg3 << std::endl << std::endl;
 
-        get_instruction_from_str(opcode, operand, savefile);
+        get_instruction_from_str(opcode, operand, savefile, sb);
     }
     savefile.close();
-    
+    // std::cout << instruction_buffer::get_instance()->get_location() << std::endl;
 }
 
-/**
- * Use stoi(string) to convert string operand to integer operand
- */

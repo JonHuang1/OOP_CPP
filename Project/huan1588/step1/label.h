@@ -1,8 +1,16 @@
 #ifndef LABEL_H_
 #define LABEL_H_
+#include "stmt.h"
+#include <string>
 
-class label {
-
+class label : public stmt {
+public:
+    void serialize(std::ofstream& savefile);
+    bool need_patchup();
+    label(std::string _name, int _location);
+private:
+    std::string to_serialize;
+    bool patchup_status;
 };
 
-#endif /* LABEL_H_ */
+#endif /* POP_H_ */

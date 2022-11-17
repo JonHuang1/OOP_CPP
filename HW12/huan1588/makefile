@@ -1,12 +1,9 @@
-OBJS = main.o start.o tableentry.o symboltable.o Exit.o pushi.o printtos.o \
-add.o prints.o string_buffer.o Div.o dup.o mul.o negate.o pop.o swap.o \
-instruction_buffer.o label.o 
-
-CC = g++
+OBJS = main.o Person.o Student.o TA.o Teacher.o
+CC = g++ -std=c++11 -Wall -g
 INCLUDE = 
 LIBS = -lm
-CFLAGS = -std=c++11 -Wall -g
-EXECUTABLE = project
+CFLAGS =   
+EXECUTABLE = HW12
 COMMANDLINE = 
 
 .PHONY : run
