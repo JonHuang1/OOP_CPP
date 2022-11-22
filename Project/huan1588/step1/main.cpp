@@ -46,12 +46,12 @@ void get_instruction_from_str(std::string& opcode, std::string& operand, std::st
     }
     else if (opcode == "declarr")
     {
-        std::make_unique<declarr>(operand, stoi(operand2));
+        std::make_unique<declarr>(operand, stoi(operand2), savefile);
         return;
     }
     else if (opcode == "declscal")
     {
-        std::make_unique<declscal>(operand);
+        std::make_unique<declscal>(operand, savefile);
         return;
     }
     else if (opcode == "div")
@@ -66,7 +66,8 @@ void get_instruction_from_str(std::string& opcode, std::string& operand, std::st
     {
         if (!operand.empty())
         {
-            // ERROR
+            savefile << "Error: Operand in end opcode" << std::endl;
+            exit(1);
         }
         return;
     }
@@ -80,7 +81,7 @@ void get_instruction_from_str(std::string& opcode, std::string& operand, std::st
     }
     else if (opcode == "gosublabel")
     {
-        instruction = std::make_unique<gosublabel>(operand);
+        instruction = std::make_unique<gosublabel>(operand, savefile);
     }
     else if (opcode == "jump")
     {
@@ -96,7 +97,7 @@ void get_instruction_from_str(std::string& opcode, std::string& operand, std::st
     }
     else if (opcode == "label")
     {
-        std::make_unique<label>(operand, ib->get_location());
+        std::make_unique<label>(operand, ib->get_location(), savefile);
         return;
     }
     else if (opcode == "mul")

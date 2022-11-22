@@ -6,8 +6,12 @@
 #include <string>
 #include <iostream>
 
-gosublabel::gosublabel(std::string _name) : to_serialize("GoSubLabel, " + _name), patchup_status(true) {
-    SymbolTable::get_instance()->insert_label(_name, instruction_buffer::get_instance()->get_location());
+gosublabel::gosublabel(std::string _name, std::ofstream& savefile) : to_serialize("GoSubLabel, " + _name), patchup_status(true) {
+    int err = SymbolTable::get_instance()->insert_label(_name, instruction_buffer::get_instance()->get_location());
+    if (!err) {
+        savefile << "error: attempting to add label with name " << _name << " twice" << std::endl;
+        exit(1);
+    }
     SymbolTable::get_instance()->enter_scope();
 }
 

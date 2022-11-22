@@ -15,7 +15,7 @@ SymbolTable* SymbolTable::get_instance() {
     return instance;
 }
 
-SymbolTable::SymbolTable() : location(0), outer_location(0), inner_size(0), savefile(0) { 
+SymbolTable::SymbolTable() : location(0), outer_location(0), inner_size(0) { 
     enter_scope();
 }
 
@@ -35,23 +35,23 @@ TableEntry* SymbolTable::find_symbol(std::string _name) {
     }
 }
 
-void SymbolTable::insert_label(std::string _name, int _location) {
+int SymbolTable::insert_label(std::string _name, int _location) {
     if (table.back().count(_name) == 1)
     {
-        savefile << "error: attempting to add label with name L1 twice" << std::endl;
-        exit(1); 
+        return 0;
     }
     table.back()[_name] = new TableEntry(_location, 0);
+    return 1;
 }
 
-void SymbolTable::insert_var(std::string _name, int _length) {
+int SymbolTable::insert_var(std::string _name, int _length) {
     if (table.back().count(_name) == 1)
     {
-        savefile << "error: attempting to add variable with name A twice" << std::endl;
-        exit(1);
+        return 0;
     }
     table.back()[_name] = new TableEntry(location, _length);
     location += _length;
+    return 1;
 }
 
 void SymbolTable::enter_scope() {

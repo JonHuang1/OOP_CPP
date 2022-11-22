@@ -7,7 +7,7 @@ class declscal : public stmt {
 public:
     void serialize(std::ofstream& savefile);
     bool need_patchup();
-    declscal(std::string _name);
+    declscal(std::string _name, std::ofstream& savefile);
 private:
     std::string to_serialize;
     bool patchup_status;

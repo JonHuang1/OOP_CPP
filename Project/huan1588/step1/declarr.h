@@ -7,7 +7,7 @@ class declarr : public stmt {
 public:
     void serialize(std::ofstream& savefile);
     bool need_patchup();
-    declarr(std::string _name, int _size);
+    declarr(std::string _name, int _size, std::ofstream& savefile);
 private:
     std::string to_serialize;
     bool patchup_status;

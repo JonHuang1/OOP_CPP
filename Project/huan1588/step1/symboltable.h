@@ -9,8 +9,8 @@ class SymbolTable {
 public:
     static SymbolTable* get_instance();
     void set_savefile(std::ofstream& savefile);
-    void insert_label(std::string _name, int _location);
-    void insert_var(std::string _name, int _length);
+    int insert_label(std::string _name, int _location);
+    int insert_var(std::string _name, int _length);
     TableEntry* find_symbol(std::string _name);
 
     void enter_scope();
@@ -25,7 +25,6 @@ private:
     int location;
     int outer_location;
     int inner_size;
-    std::ofstream& savefile;
 };
 
 #endif /* SYMBOLTABLE_H_ */

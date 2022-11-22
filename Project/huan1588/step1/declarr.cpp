@@ -4,8 +4,12 @@
 #include <iostream>
 #include <fstream>
 
-declarr::declarr(std::string _name, int _length) : to_serialize(""), patchup_status(false) {
-    SymbolTable::get_instance()->insert_var(_name, _length);
+declarr::declarr(std::string _name, int _length, std::ofstream& savefile) : to_serialize(""), patchup_status(false) {
+    int err = SymbolTable::get_instance()->insert_var(_name, _length);
+    if (!err) {
+        savefile << "error: attempting to add variable with name " << _name << " twice" << std::endl;
+        exit(1);
+    }
 }
 
 void declarr::serialize(std::ofstream& savefile) {

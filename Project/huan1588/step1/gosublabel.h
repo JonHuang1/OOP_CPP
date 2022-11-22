@@ -8,7 +8,7 @@ public:
     void serialize(std::ofstream& savefile);
     bool need_patchup();
     void patchup();
-    gosublabel(std::string _name);
+    gosublabel(std::string _name, std::ofstream& savefile);
 private:
     std::string to_serialize;
     bool patchup_status;
