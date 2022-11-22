@@ -5,12 +5,14 @@
 
 class string_buffer {
 public:
-    string_buffer();
+    static string_buffer* get_instance();
     void insert(std::string _string);
     std::string get_string(int storage_index);
     int get_index();
 
 private:
+    string_buffer();
+    static string_buffer* instance;
     std::vector<std::string> buffer;
     int index;
 };

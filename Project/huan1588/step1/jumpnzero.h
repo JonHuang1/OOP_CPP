@@ -5,12 +5,14 @@
 
 class jumpnzero : public stmt {
 public:
-    void serialize(std::string file);
+    void serialize(std::ofstream& savefile);
     bool need_patchup();
-    jumpnzero();
+    void patchup();
+    jumpnzero(std::string _name);
 private:
     std::string to_serialize;
     bool patchup_status;
+    std::string dest;
 };
 
 #endif /* JUMPNZERO_H_ */

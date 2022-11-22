@@ -3,6 +3,15 @@
 
 #include "string_buffer.h"
 
+string_buffer* string_buffer::instance = nullptr;
+
+string_buffer* string_buffer::get_instance() {
+    if (instance == nullptr) {
+        instance = new string_buffer();
+    }
+    return instance;
+}
+
 string_buffer::string_buffer()
 {
     index = 0;

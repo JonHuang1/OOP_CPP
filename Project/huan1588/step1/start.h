@@ -7,6 +7,7 @@ class start : public stmt {
 public:
     void serialize(std::ofstream& savefile);
     bool need_patchup();
+    void patch();
     start();
 private:
     int var_count;

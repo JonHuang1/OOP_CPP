@@ -6,7 +6,6 @@
 #include <iostream>
 
 label::label(std::string _name, int _location) : to_serialize(""), patchup_status(false) {
-    std::cout << 1 << std::endl;
     SymbolTable::get_instance()->insert_label(_name, _location);
 }
 

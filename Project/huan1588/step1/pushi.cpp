@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 
-pushi::pushi(int _integer) : to_serialize("PushI "), integer(_integer), patchup_status(false) {
+pushi::pushi(int _integer) : integer(_integer), to_serialize("PushI "), patchup_status(false) {
 }
 
 void pushi::serialize(std::ofstream& savefile) {

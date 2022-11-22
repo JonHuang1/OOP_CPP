@@ -15,4 +15,4 @@ private:
     std::string dest;
 };
 
-#endif /* POP_H_ */
+#endif /* JUMP_H_ */

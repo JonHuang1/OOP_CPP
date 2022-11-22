@@ -1,8 +1,16 @@
 #ifndef END_H_
 #define END_H_
+#include "stmt.h"
+#include <string>
 
-class end {
-
+class end : public stmt {
+public:
+    void serialize(std::ofstream& savefile);
+    bool need_patchup();
+    end();
+private:
+    std::string to_serialize;
+    bool patchup_status;
 };
 
-#endif /* END_H_ */
+#endif /* ADD_H_ */

@@ -27,7 +27,7 @@
 #include "pusharr.h"
 #include "pushi.h"
 #include "pushscal.h"
-#include "return.h"
+#include "Return.h"
 #include "start.h"
 #include "stmt.h"
 #include "string_buffer.h"
@@ -35,171 +35,174 @@
 #include "symboltable.h"
 #include "tableentry.h"
 
-void get_instruction_from_str(std::string& opcode, std::string& operand, std::ofstream& savefile, string_buffer* sb)
+void get_instruction_from_str(std::string& opcode, std::string& operand, std::string& operand2, std::ofstream& savefile)
 {
     std::unique_ptr<stmt> instruction;
     instruction_buffer* ib = instruction_buffer::get_instance();
+    string_buffer* sb = string_buffer::get_instance();
     if (opcode == "add")
     {
         instruction = std::make_unique<add>();
-        instruction->serialize(savefile);
     }
     else if (opcode == "declarr")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        std::make_unique<declarr>(operand, stoi(operand2));
+        return;
     }
     else if (opcode == "declscal")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        std::make_unique<declscal>(operand);
+        return;
     }
     else if (opcode == "div")
     {
         instruction = std::make_unique<Div>();
-        instruction->serialize(savefile);
     }
     else if (opcode == "dup")
     {
         instruction =  std::make_unique<dup>();
-        instruction->serialize(savefile);
     }
     else if (opcode == "end")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        if (!operand.empty())
+        {
+            // ERROR
+        }
+        return;
     }
     else if (opcode == "exit")
     {
         instruction = std::make_unique<Exit>();
-        instruction->serialize(savefile);
     }
     else if (opcode == "gosub")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        instruction = std::make_unique<gosub>(operand);
     }
     else if (opcode == "gosublabel")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        instruction = std::make_unique<gosublabel>(operand);
     }
     else if (opcode == "jump")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        instruction = std::make_unique<jump>(operand);
     }
     else if (opcode == "jumpnzero")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        instruction = std::make_unique<jumpnzero>(operand);
     }
     else if (opcode == "jumpzero")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        instruction = std::make_unique<jumpzero>(operand);
     }
     else if (opcode == "label")
     {
-        std::cout << operand << ", " << ib->get_location() << std::endl;
-        instruction = std::make_unique<label>(operand, ib->get_location());
-        instruction->serialize(savefile);
+        std::make_unique<label>(operand, ib->get_location());
+        return;
     }
     else if (opcode == "mul")
     {
         instruction = std::make_unique<mul>();
-        instruction->serialize(savefile);
     }
     else if (opcode == "negate")
     {
         instruction = std::make_unique<negate>();
-        instruction->serialize(savefile);
     }
     else if (opcode == "pop")
     {
         instruction = std::make_unique<pop>();
-        instruction->serialize(savefile);
     }
     else if (opcode == "poparr")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        instruction = std::make_unique<poparr>(operand);
     }
     else if (opcode == "popscal")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        instruction = std::make_unique<popscal>(operand);
     }
     else if (opcode == "prints")
     {
         instruction = std::make_unique<prints>(operand, sb);
-        instruction->serialize(savefile);
     }
     else if (opcode == "printtos")
     {
         instruction = std::make_unique<printtos>();
-        instruction->serialize(savefile);
     }
     else if (opcode == "pusharr")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        instruction = std::make_unique<pusharr>(operand);
     }
     else if (opcode == "pushi")
     {
         instruction = std::make_unique<pushi>(stoi(operand));
-        instruction->serialize(savefile);
     }
     else if (opcode == "pushscal")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        instruction = std::make_unique<pushscal>(operand);
     }
     else if (opcode == "return")
     {
-        // instruction = std::make_unique<negate>();
-        // instruction->serialize(savefile);
+        instruction = std::make_unique<Return>();
     }
     else if (opcode == "start")
     {
         instruction = std::make_unique<start>();
-        instruction->serialize(savefile);
     }
     else if (opcode == "swap")
     {
         instruction = std::make_unique<swap>();
-        instruction->serialize(savefile);
     }
     else
     {
         instruction = NULL;
+        std::cout << "Invalid instruction encountered" << std::endl;
     }
+
+    if (instruction.get() == nullptr)
+    {
+        std::cout << "Error, got null pointer when passed in opcode " << opcode << std::endl;
+        //exit(1);
+    }
+
     ib->insert(std::move(instruction));
 }
 
-int main() 
+int main(int argc, char** argv) 
 {
-    std::ifstream infile("/home/jonhuang918/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/11Label");
-    // std::ifstream infile("/home/jon/ECE39595/Project/OutputAndTestCases/TestCases10_08_22/0StartExit");
+
+    if (argc != 2)
+    {
+        std::cout << "Error, must specify file to parse" << std::endl;
+        exit(1);
+    }
+
+    std::ifstream infile(argv[1]);
     
     std::string line;
     std::ofstream savefile("test", std::ofstream::out);
-    string_buffer* sb = new string_buffer();
-    // instruction_buffer* ib = instruction_buffer::get_instance();
+    instruction_buffer* ib = instruction_buffer::get_instance();
+    int end = 0; // end flag
 
     while (std::getline(infile, line))
     {
         std::istringstream iss(line);
-        std::string opcode, operand, arg3;
-        iss >> opcode >> operand >> arg3;
+        std::string opcode, operand, operand2;
+        iss >> opcode >> operand >> operand2;
         std::cout << line << std::endl;
-        
-        // std::cout << "opcode = " + opcode << std::endl;
-        // std::cout << "operand = " + operand << std::endl;
-        // std::cout << "arg3 = " + arg3 << std::endl << std::endl;
+        if (end == 1) {
+            savefile << "error: code encountered after an end statement" << std::endl;
+            exit(1);
+        }
+        if (opcode == "end") {
+            end = 1;
+        }
 
-        get_instruction_from_str(opcode, operand, savefile, sb);
+        get_instruction_from_str(opcode, operand, operand2, savefile);
     }
+    if (end != 1) {
+        savefile << "error: no end statement in program" << std::endl;
+        exit(1);
+    }
+    ib->serialize(savefile);
     savefile.close();
     // std::cout << instruction_buffer::get_instance()->get_location() << std::endl;
 }

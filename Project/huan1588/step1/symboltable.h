@@ -8,6 +8,7 @@
 class SymbolTable {
 public:
     static SymbolTable* get_instance();
+    void set_savefile(std::ofstream& savefile);
     void insert_label(std::string _name, int _location);
     void insert_var(std::string _name, int _length);
     TableEntry* find_symbol(std::string _name);
@@ -15,13 +16,16 @@ public:
     void enter_scope();
     void leave_scope();
 
-    int get_var_num();
+    int get_size();
+    int get_inner_size();
 private:
     SymbolTable();
     static SymbolTable* instance;
     std::vector<std::unordered_map<std::string, TableEntry*>> table;
     int location;
-    int var_num;
+    int outer_location;
+    int inner_size;
+    std::ofstream& savefile;
 };
 
 #endif /* SYMBOLTABLE_H_ */

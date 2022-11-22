@@ -1,4 +1,4 @@
-#include "jump.h"
+#include "gosub.h"
 #include "symboltable.h"
 #include "instruction_buffer.h"
 #include "symboltable.h"
@@ -6,9 +6,9 @@
 #include <string>
 #include <iostream>
 
-jump::jump(std::string _name) : to_serialize("Jump, "), patchup_status(true), dest(_name) {}
+gosub::gosub(std::string _name) : to_serialize("GoSub, "+_name), patchup_status(true), dest(_name) {}
 
-void jump::serialize(std::ofstream& savefile) {
+void gosub::serialize(std::ofstream& savefile) {
     patchup();
     if (savefile.is_open())
     {
@@ -17,11 +17,11 @@ void jump::serialize(std::ofstream& savefile) {
     return;
 }
 
-bool jump::need_patchup() {
+bool gosub::need_patchup() {
     return patchup_status;
 }
 
-void jump::patchup() {
+void gosub::patchup() {
     int destination = SymbolTable::get_instance()->find_symbol(dest)->get_location();
-    to_serialize += std::to_string(destination);
+    to_serialize += "(" + std::to_string(destination) + ")";
 }

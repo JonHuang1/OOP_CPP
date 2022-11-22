@@ -1,1 +1,11 @@
-Start 0
+Start 1
+PushI 4
+GoSub, L1(4)
+Jump, 8
+GoSubLabel, L1 (1)
+PopScalar A, (1)
+PushScalar A, (1)
+Return
+PopScalar A, (1)
+Prints exit_pgm
+Exit

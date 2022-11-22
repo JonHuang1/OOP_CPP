@@ -11,8 +11,8 @@ public:
     prints(std::string _string, string_buffer* _sb);
 private:
     std::string to_serialize;
-    int storage_index;
     bool patchup_status;
+    int storage_index;
 };
 
 #endif /* PRINTS_H_ */

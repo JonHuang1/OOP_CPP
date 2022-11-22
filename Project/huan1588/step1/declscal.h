@@ -5,11 +5,12 @@
 
 class declscal : public stmt {
 public:
-    declscal(std::string _name, int pos);
-    void insert_to_symbol_table();
-    void serialize();
+    void serialize(std::ofstream& savefile);
+    bool need_patchup();
+    declscal(std::string _name);
 private:
-    std::string name;
+    std::string to_serialize;
+    bool patchup_status;
 };
 
 #endif /* DECLSCAL_H_ */
