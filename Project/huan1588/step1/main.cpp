@@ -179,7 +179,7 @@ int main(int argc, char** argv)
     std::ifstream infile(argv[1]);
     
     std::string line;
-    std::ofstream savefile("test", std::ofstream::out);
+    std::ofstream savefile("test.out", std::ofstream::out);
     instruction_buffer* ib = instruction_buffer::get_instance();
     int end = 0; // end flag
 
