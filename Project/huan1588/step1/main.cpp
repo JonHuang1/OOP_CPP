@@ -179,8 +179,9 @@ int main(int argc, char** argv)
     std::ifstream infile(argv[1]);
     
     std::string line;
-    std::ofstream savefile("test.out", std::ofstream::out);
+    std::ofstream savefile("test.pout", std::ofstream::out);
     instruction_buffer* ib = instruction_buffer::get_instance();
+    string_buffer* sb = string_buffer::get_instance();
     int end = 0; // end flag
 
     while (std::getline(infile, line))
@@ -203,6 +204,7 @@ int main(int argc, char** argv)
         savefile << "error: no end statement in program" << std::endl;
         exit(1);
     }
+    sb->serialize(savefile);
     ib->serialize(savefile);
     savefile.close();
     // std::cout << instruction_buffer::get_instance()->get_location() << std::endl;

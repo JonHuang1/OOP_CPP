@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 
-jump::jump(std::string _name) : to_serialize("Jump, "), patchup_status(true), dest(_name) {}
+jump::jump(std::string _name) : to_serialize("Jump "), patchup_status(true), dest(_name) {}
 
 void jump::serialize(std::ofstream& savefile) {
     patchup();

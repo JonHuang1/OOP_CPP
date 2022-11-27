@@ -6,7 +6,8 @@
 #include <string>
 #include <iostream>
 
-gosub::gosub(std::string _name) : to_serialize("GoSub, "+_name), patchup_status(true), dest(_name) {}
+gosub::gosub(std::string _name) : 
+to_serialize("GoSub "), patchup_status(true), dest(_name) {}
 
 void gosub::serialize(std::ofstream& savefile) {
     patchup();
@@ -23,5 +24,5 @@ bool gosub::need_patchup() {
 
 void gosub::patchup() {
     int destination = SymbolTable::get_instance()->find_symbol(dest)->get_location();
-    to_serialize += "(" + std::to_string(destination) + ")";
+    to_serialize += std::to_string(destination);
 }

@@ -4,7 +4,8 @@
 #include <iostream>
 #include <fstream>
 
-pushscal::pushscal(std::string _name) : to_serialize("PushScalar " + _name + ", "), patchup_status(true), name(_name) {
+pushscal::pushscal(std::string _name) : 
+to_serialize("PushScalar "), patchup_status(true), name(_name) {
 }
 
 void pushscal::serialize(std::ofstream& savefile) {
@@ -21,6 +22,6 @@ bool pushscal::need_patchup() {
 
 void pushscal::patchup() {
     int location = SymbolTable::get_instance()->find_symbol(name)->get_location();
-    to_serialize += "(" + std::to_string(location) + ")";
+    to_serialize += std::to_string(location);
 }
     

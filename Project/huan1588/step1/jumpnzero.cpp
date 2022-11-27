@@ -6,7 +6,8 @@
 #include <string>
 #include <iostream>
 
-jumpnzero::jumpnzero(std::string _name) : to_serialize("JumpNZero, " + _name + ", "), patchup_status(true), dest(_name) {}
+jumpnzero::jumpnzero(std::string _name) : 
+to_serialize("JumpNZero "), patchup_status(true), dest(_name) {}
 
 void jumpnzero::serialize(std::ofstream& savefile) {
     patchup();
@@ -23,5 +24,5 @@ bool jumpnzero::need_patchup() {
 
 void jumpnzero::patchup() {
     int destination = SymbolTable::get_instance()->find_symbol(dest)->get_location();
-    to_serialize += "(" + std::to_string(destination) + ")";
+    to_serialize += std::to_string(destination);
 }

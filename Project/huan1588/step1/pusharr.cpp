@@ -4,7 +4,8 @@
 #include <iostream>
 #include <fstream>
 
-pusharr::pusharr(std::string _name) : to_serialize("PushArray " + _name + ", "), patchup_status(true), name(_name) {
+pusharr::pusharr(std::string _name) : 
+to_serialize("PushArray "), patchup_status(true), name(_name) {
 }
 
 void pusharr::serialize(std::ofstream& savefile) {
@@ -21,6 +22,6 @@ bool pusharr::need_patchup() {
 
 void pusharr::patchup() {
     int location = SymbolTable::get_instance()->find_symbol(name)->get_location();
-    to_serialize += "(" + std::to_string(location) + ")";
+    to_serialize += std::to_string(location);
 }
     

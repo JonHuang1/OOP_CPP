@@ -9,6 +9,7 @@ public:
     void insert(std::string _string);
     std::string get_string(int storage_index);
     int get_index();
+    void serialize(std::ofstream& savefile);
 
 private:
     string_buffer();

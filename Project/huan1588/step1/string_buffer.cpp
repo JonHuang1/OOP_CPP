@@ -1,5 +1,7 @@
 #include <vector>
 #include <string>
+#include <fstream>
+#include <iostream>
 
 #include "string_buffer.h"
 
@@ -15,6 +17,12 @@ string_buffer* string_buffer::get_instance() {
 string_buffer::string_buffer()
 {
     index = 0;
+}
+
+void string_buffer::serialize(std::ofstream& savefile) {
+    for (auto& i : buffer) {
+        savefile << i << std::endl;
+    }
 }
 
 void string_buffer::insert(std::string _string) {

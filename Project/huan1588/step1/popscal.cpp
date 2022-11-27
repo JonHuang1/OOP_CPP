@@ -4,7 +4,8 @@
 #include <iostream>
 #include <fstream>
 
-popscal::popscal(std::string _name) : to_serialize("PopScalar " + _name + ", "), patchup_status(true), name(_name) {
+popscal::popscal(std::string _name) : 
+to_serialize("PopScalar "), patchup_status(true), name(_name) {
 }
 
 void popscal::serialize(std::ofstream& savefile) {
@@ -21,6 +22,6 @@ bool popscal::need_patchup() {
 
 void popscal::patchup() {
     int location = SymbolTable::get_instance()->find_symbol(name)->get_location();
-    to_serialize += "(" + std::to_string(location) + ")";
+    to_serialize += std::to_string(location);
 }
     

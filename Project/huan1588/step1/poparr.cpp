@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 
-poparr::poparr(std::string _name) : to_serialize("PopArray " + _name + ", "), patchup_status(true), name(_name) {
+poparr::poparr(std::string _name) : to_serialize("PopArray "), patchup_status(true), name(_name) {
 }
 
 void poparr::serialize(std::ofstream& savefile) {
@@ -21,6 +21,6 @@ bool poparr::need_patchup() {
 
 void poparr::patchup() {
     int location = SymbolTable::get_instance()->find_symbol(name)->get_location();
-    to_serialize += "(" + std::to_string(location) + ")";
+    to_serialize += std::to_string(location);
 }
     
