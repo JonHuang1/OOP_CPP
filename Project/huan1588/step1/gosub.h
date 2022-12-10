@@ -13,6 +13,7 @@ private:
     std::string to_serialize;
     bool patchup_status;
     std::string dest;
+    int dest_loc;
 };
 
 #endif /* GOSUB_H_ */
